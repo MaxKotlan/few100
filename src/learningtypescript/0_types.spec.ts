@@ -1,3 +1,4 @@
+/* eslint-disable prefer-const */
 describe('data types in typescript', () => {
   xit('demo', () => {
     const a = 10; const b = 20;
@@ -164,5 +165,98 @@ describe('data types in typescript', () => {
 
     expect(myAccount).toBe('standard');
   });
+
+  // Object literals -> interfaces
+  describe('object literals', () => {
+
+    it('has them', () => {
+      interface Book {
+        title: string;
+        author: string;
+        numberOfPages: number;
+        genre?: 'fiction' | 'non-fiction' | 'fantasy' | 'comic';
+      };
+      const book: Book = {
+        title: 'Walden',
+        author: 'Hank Thoreau',
+        numberOfPages: 212,
+        genre: 'non-fiction'
+      };
+
+      const book2: Book = {
+        title: 'Nature',
+        author: 'Emerson',
+        numberOfPages: 312
+      };
+
+
+      expect(book.title).toBe('Walden');
+      // eslint-disable-next-line @typescript-eslint/dot-notation
+      expect(book['author']).toBe('Hank Thoreau'); // indexer notation
+
+      book.author = 'Henry Thoreau';
+      // book.genre = 'Philsophy';
+    });
+  });
+  // array literals -> array functions.
+  describe('Array Literals', () => {
+    it('will infer data types', () => {
+      const favoriteNumbers = [9, 10, 20, 108];
+
+      let friends: string[];
+      friends = ['Billy', 'Amy', 'Joe'];
+      favoriteNumbers[0] = 3;
+
+      expect(friends[1]).toBe('Amy');
+      expect(favoriteNumbers[0]).toBe(3);
+
+      expect(favoriteNumbers).toEqual([3, 10, 20, 108]);
+
+      const friend = { name: 'Bill', age: 42 };
+      const friend2 = { name: 'Bill', age: 42 };
+      expect(friend).toEqual(friend2);
+
+      // const favoriteColores: (string | number)[] = ['Blue', 0xff, 'Green'];
+      const favoriteColores: Array<string | number> = ['Blue', 0xff, 'Green'];
+
+      const second = favoriteColores[1];
+
+
+
+    });
+
+    it('arrays are mutable BUT DON\'T DO THIS', () => {
+      // mutable you can change stuff.
+      const friends = ['Billy', 'Amy', 'Joe'];
+      friends[0] = 'Sean';
+      friends.push('Byron');
+      expect(friends[3]).toBe('Byron');
+      friends.pop();
+      friends.unshift('Roy');
+      expect(friends[0]).toBe('Roy');
+      // immutable means you cannot change things
+
+      const name = 'Jeff';
+      const upperName = name.toUpperCase();
+      expect(name).toBe('Jeff');
+      expect(upperName).toBe('JEFF');
+    });
+
+    it('altering arrays immutably', () => {
+      const friends = ['Billy', 'Amy', 'Joe'];
+      const newFriends = ['Byron', ...friends];
+      expect(newFriends).toEqual(['Byron', 'Billy', 'Amy', 'Joe']);
+      const friendsWithoutAmy = newFriends.filter(friend => friend !== 'Amy');
+      expect(friendsWithoutAmy).toEqual(['Byron', 'Billy', 'Joe']);
+
+      const firstIsByron = friendsWithoutAmy[0] === 'Byron';
+
+    });
+
+  });
+  // Function literals -> functins on classes which methods.
+
+
+
 });
 
