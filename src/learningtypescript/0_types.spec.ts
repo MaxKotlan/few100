@@ -1,3 +1,4 @@
+/* eslint-disable prefer-arrow/prefer-arrow-functions */
 /* eslint-disable prefer-const */
 describe('data types in typescript', () => {
   xit('demo', () => {
@@ -255,7 +256,39 @@ describe('data types in typescript', () => {
 
   });
   // Function literals -> functins on classes which methods.
+  describe('function literals', () => {
+    it('has three basic ways to create a function. we use two of them.', () => {
 
+      expect(add(2, 2)).toBe(4);
+
+      // named functions
+      // int add(int a, int b) {}
+      function add(a: number, b: number): number {
+        return a + b;
+      }
+
+      // Arrow functions (anonymouse functions)
+      const subtract = (a: number, b: number): number => a - b;
+
+      const divide = (a: number, b: number): number => {
+        if (b === 0) {
+          console.log('YOU TRIED TO OPEN A BLACK HOLE');
+          return 0;
+        } else {
+          return a / b;
+        }
+      };
+      /// named anonymous function.
+      const multiply = function (a: number, b: number): number {
+        return a * b;
+      };
+
+      expect(subtract(10, 2)).toBe(8);
+      expect(multiply(3, 3)).toBe(9);
+
+    });
+
+  });
 
 
 });
