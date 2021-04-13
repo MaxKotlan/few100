@@ -279,6 +279,7 @@ describe('data types in typescript', () => {
         }
       };
       /// named anonymous function.
+      // eslint-disable-next-line space-before-function-paren
       const multiply = function (a: number, b: number): number {
         return a * b;
       };
