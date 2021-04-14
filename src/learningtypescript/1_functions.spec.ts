@@ -1,3 +1,5 @@
+import { stringify } from '@angular/compiler/src/util';
+
 /* eslint-disable prefer-arrow/prefer-arrow-functions */
 describe('functions', () => {
 
@@ -102,6 +104,47 @@ describe('functions', () => {
       }
     });
 
+    describe('higher order functions', () => {
+      //any function that takes as an argument one or more functions, and/or returns a function
+      const tagMaker = (tag: string, content: string): string => `<${tag}>${content}</${tag}>`;
+
+      it('making elements old-school - procedureally', () => {
+        expect(tagMaker('h1', 'Hello')).toBe('<h1>Hello</h1>');
+        expect(tagMaker('h1', 'TacoTuesday')).toBe('<h1>TacoTuesday</h1>');
+        expect(tagMaker('h2', 'Greetings')).toBe('<h2>Greetings</h2>');
+        expect(tagMaker('p', 'Content')).toBe('<p>Content</p>');
+      });
+      it('making elements oop style', () => {
+
+        class tagMaker {
+
+          constructor(private tag: string){}
+
+          make(content: string): string{
+            return `<${this.tag}>${content}</${this.tag}>`;
+          }
+        };
+
+        const h1Maker = new tagMaker('h1');
+        const h2Maker = new tagMaker('h2');
+        const pMaker = new tagMaker('p');
+
+        expect(h1Maker.make('Hello')).toBe('<h1>Hello</h1>');
+        expect(h1Maker.make('TacoTuesday')).toBe('<h1>TacoTuesday</h1>');
+        expect(h2Maker.make('Greetings')).toBe('<h2>Greetings</h2>');
+        expect(pMaker.make('Content')).toBe('<p>Content</p>');
+
+      });
+      it('making elements using hof', () => {
+        type TagMakingFunction = (content: string) => string;
+        const tagMaker = (tag: string): TagMakingFunction => (content: string) => `<${tag}>${content}</${tag}>`;
+
+        expect(tagMaker('h1')('Hello')).toBe('<h1>Hello</h1>');
+        expect(tagMaker('h1')('TacoTuesday')).toBe('<h1>TacoTuesday</h1>');
+        expect(tagMaker('h2')('Greetings')).toBe('<h2>Greetings</h2>');
+        expect(tagMaker('p')('Content')).toBe('<p>Content</p>');
+      });
+    });
   });
 });
 
