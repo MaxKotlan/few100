@@ -1,6 +1,11 @@
+// import * as fromMathUtils from 'src/app/utils/math';
+import { isEven, makeUpper } from '../app/utils';
+
+
 describe('array methods', () => {
 
   const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+
   describe('visiting each member of an array', () => {
     it('has forEach', () => {
 
@@ -17,7 +22,7 @@ describe('array methods', () => {
 
     it('filtering a list', () => {
       // LINQ where
-      const evens = numbers.filter(n => n % 2 === 0);
+      const evens = numbers.filter(isEven);
 
       expect(evens).toEqual([2, 4, 6, 8]);
       expect(numbers).toEqual([1, 2, 3, 4, 5, 6, 7, 8, 9]);
@@ -43,7 +48,9 @@ describe('array methods', () => {
 
     it('checking membership of an array', () => {
       // c# LiNQ All
-      const allEven = numbers.every(n => n % 2 === 0);
+      const isEven = (n: number) => n % 2 === 0;
+
+      const allEven = numbers.every(isEven);
       expect(allEven).toBeFalse();
 
       // LINQ any
@@ -57,6 +64,9 @@ describe('array methods', () => {
 
       const total = numbers.reduce((s, n) => s + n);
       expect(total).toBe(45);
+
+      const bigTotal = numbers.reduce((state, next) => state + next, 100);
+      expect(bigTotal).toEqual(145);
     });
 
   });
