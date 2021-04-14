@@ -270,7 +270,7 @@ describe('data types in typescript', () => {
       }
 
 
-      // Arrow functions (anonymouse functions)
+      // Arrow functions (anonymous functions)
       const subtract = (a: number, b: number): number => a - b;
 
       const divide = (a: number, b: number): number => {
