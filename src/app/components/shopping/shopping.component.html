@@ -1,0 +1,10 @@
+<ul>
+  <li *ngFor="let item of shoppingList">{{ item }}</li>
+</ul>
+
+<div class="">
+  <label for="item">What do you want to add</label>
+  <input type="text"
+        #thingy>
+  <button class="btn btn-success" (click)="addItem(thingy)">Click To Add</button>
+</div>
