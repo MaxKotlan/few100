@@ -6,19 +6,18 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'Front End Web 100';
-  
+  title = 'Front-End Web 100';
+
   shoppingList = [
-    "Beer",
-    "Shampoo",
-    "Taco Shells"
+    'Beer',
+    'Shampoo',
+    'Taco Shells'
   ]
-  
-  addItem(item: HTMLInputElement){
-    //this.shoppingList.push(item);
+
+  // void addItem(string item)
+  addItem(item: HTMLInputElement): void {
     this.shoppingList = [item.value, ...this.shoppingList];
     item.value = '';
     item.focus();
   }
-
 }

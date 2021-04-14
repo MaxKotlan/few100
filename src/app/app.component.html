@@ -1,16 +1,17 @@
 <header>
-  <h1>{{title}}</h1>
-  <p>My First Angular App</p>
+  <h1>{{ title }}</h1>
+  <p>Angular App</p>
 </header>
 
-<p>2 + 2 = {{2+2+2+2}}</p>
+<p>2 + 2 = {{ 2 + 2 }}</p>
 
 <ul>
-  <li *ngFor="let i of shoppingList;">{{i}}</li>
+  <li *ngFor="let item of shoppingList">{{ item }}</li>
 </ul>
 
 <div class="">
-  <label for="item">what do you want to add</label>
-  <input type="text" #newItem>
-  <button (click)="addItem(newItem)">Click to Add</button>
+  <label for="item">What do you want to add</label>
+  <input type="text"
+         #thingy>
+  <button (click)="addItem(thingy)">Click To Add</button>
 </div>
