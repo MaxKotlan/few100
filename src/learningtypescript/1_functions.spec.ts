@@ -40,9 +40,9 @@ describe('functions', () => {
         // expect(result.fullName).toBe('Solo, Han');
         // expect(result.numberOfLetters).toBe(9);
         // object destructuring
-        const { fullName, numberOfLetters: len } = formatName('Han', 'Solo');
+        const { fullName, numberOfLetters: carrot } = formatName('Han', 'Solo');
         expect(fullName).toBe('Solo, Han');
-        expect(len).toBe(9);
+        expect(carrot).toBe(9);
       });
 
       it('using an array return type [tuple]', () => {
@@ -59,12 +59,66 @@ describe('functions', () => {
 
         const numbers = [1, 2, 3, 4, 5,];
 
-        const [, second, third, ...allTheRest] = numbers;
-        expect(second).toBe(2);
+        const [, taco, third, ...allTheRest] = numbers;
+        expect(taco).toBe(2);
         expect(third).toBe(3);
         expect(allTheRest).toEqual([4, 5]);
 
 
+      });
+
+      describe('higher order functions', () => {
+        // any function that takes as an argument one or more functions, and/or returns a function
+
+        it('making elements old-skool - procedurally', () => {
+
+          const tagMaker = (tag: string, content: string): string => `<${tag}>${content}</${tag}>`;
+
+          expect(tagMaker('h1', 'Hello')).toBe('<h1>Hello</h1>');
+          expect(tagMaker('h1', 'Taco Tuesday')).toBe('<h1>Taco Tuesday</h1>');
+          expect(tagMaker('h2', 'Greetings')).toBe('<h2>Greetings</h2>');
+          expect(tagMaker('p', 'Content')).toBe('<p>Content</p>');
+        });
+        it('making elements oop style', () => {
+
+          class TagMaker {
+            // private tag: string;
+            constructor(private tag: string) {
+              // this.tag = tag;
+            }
+
+            make(content: string): string {
+              return `<${this.tag}>${content}</${this.tag}>`;
+            }
+          }
+
+          const h1Maker = new TagMaker('h1');
+          const h2Maker = new TagMaker('h2');
+          const pMaker = new TagMaker('p');
+
+          expect(h1Maker.make('Hello')).toBe('<h1>Hello</h1>');
+          expect(h1Maker.make('Taco Tuesday')).toBe('<h1>Taco Tuesday</h1>');
+          expect(h2Maker.make('Greetings')).toBe('<h2>Greetings</h2>');
+          expect(pMaker.make('Content')).toBe('<p>Content</p>');
+        });
+
+        it('making elements using a HOF', () => {
+
+          // closure
+          type TagMakingFunction = (content: string) => string;
+
+          const tagMaker = (tag: string): TagMakingFunction => (content: string) => `<${tag}>${content}</${tag}>`;
+
+          const h1Maker = tagMaker('h1');
+          const h2Maker = tagMaker('h2');
+          const pMaker = tagMaker('p');
+
+
+          expect(h1Maker('Hello')).toBe('<h1>Hello</h1>');
+          expect(h1Maker('Taco Tuesday')).toBe('<h1>Taco Tuesday</h1>');
+          expect(h2Maker('Greetings')).toBe('<h2>Greetings</h2>');
+          expect(pMaker('Content')).toBe('<p>Content</p>');
+        });
       });
 
 
