@@ -13,6 +13,8 @@ describe('data types in typescript', () => {
 
     it('implicit typing', () => {
       const x = 'Cat';
+      let food = 'Tacos';
+
 
       const y = 12;
 
@@ -266,6 +268,7 @@ describe('data types in typescript', () => {
       function add(a: number, b: number): number {
         return a + b;
       }
+
 
       // Arrow functions (anonymouse functions)
       const subtract = (a: number, b: number): number => a - b;
